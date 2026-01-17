@@ -2,12 +2,14 @@ import streamlit as st
 import joblib
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
+import os
 
 
 @st.cache_resource
 def load_assets():
-    model = joblib.load('spam_ham_model.joblib')
-    vectorizer = joblib.load('count_vectorizer.joblib')
+    base_dir = os.path.dirname(__file__)
+    model = joblib.load(os.path.join(base_dir, 'spam_ham_model.joblib'))
+    vectorizer = joblib.load(os.path.join(base_dir, 'count_vectorizer.joblib'))
     return model, vectorizer
 
 model, vectorizer = load_assets()
