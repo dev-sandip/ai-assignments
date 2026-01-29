@@ -49,23 +49,12 @@ if classify_button:
             X_input = vectorizer.transform([user_message])
             prediction = model.predict(X_input)
             label = le.inverse_transform(prediction)[0]
-            
-            
-            try:
-                probs = model.predict_proba(X_input)[0]
-                spam_prob = probs[1] * 100 if len(probs) > 1 else None
-            except:
-                spam_prob = None
 
         
         if label == "spam":
             st.error(f"**SPAM** detected!")
-            if spam_prob is not None:
-                st.write(f"Spam confidence: **{spam_prob:.1f}%**")
         else:
             st.success(f"**HAM** (normal message)")
-            if spam_prob is not None:
-                st.write(f"Spam confidence: **{spam_prob:.1f}%**")
 
         st.info(f"Raw prediction class: {label}")
 
