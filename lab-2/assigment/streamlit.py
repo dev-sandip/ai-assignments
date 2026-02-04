@@ -9,7 +9,9 @@ st.set_page_config(
 
 @st.cache_resource
 def load_model():
-    return joblib.load("model.joblib")
+    base_dir = os.path.dirname(__file__)
+    model = joblib.load(os.path.join(base_dir, 'model.joblib'))
+    return model
 
 model = load_model()
 st.title("📰 Nepali News Classification")
